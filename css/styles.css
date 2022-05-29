@@ -1,0 +1,11 @@
+body {
+  background-color: lightsteelblue;
+}
+
+.header__titulo {
+  text-align: center;
+  text-transform: capitalize;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+/*# sourceMappingURL=styles.css.map */
