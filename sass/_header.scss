@@ -1,0 +1,80 @@
+.header_bar{
+    background-color: $primary-color;
+    height: 4rem;
+    .container{
+        max-width: 100rem;
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        .logo{
+            display:flex;
+            align-items: center;
+        }
+        .titulo{
+            color: $white-color;
+            line-height: 3rem;
+            margin: 0.5rem;
+            font-weight: 400;
+            .bold{
+                font-weight: bold;
+            }
+        }
+        .nav_list{
+            width: 27rem;
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            .nav_item{
+                width: 9rem;
+                .sub_menu_1{
+                    display: none;
+                }
+                a{
+                    font-size: 1rem;
+                    line-height: 2rem;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    text-align: center;
+                    display: block;
+                    padding: 1rem;
+                    text-decoration: none;
+                    color: $white-color;
+                    transition: all 0.5s ease 0s;
+                    .flecha{
+                        display: inline-block;
+                        height: 0.8rem;
+                        transition: all 0.5s ease 0s;
+                    }
+                }
+                &:hover{
+                    a{
+                        background-color: $primary-dark-color;
+                        .flecha{
+                            transform: rotateX(180deg) rotateZ(-90deg);
+                        }
+                    }
+                    .sub_menu_1{
+                        display: block;
+                        position: absolute;
+                        box-shadow: 5px 4px 5px 0px rgba(0,0,0,0.4);
+                        -webkit-box-shadow: 5px 4px 5px 0px rgba(0,0,0,0.4);
+                        -moz-box-shadow: 5px 4px 5px 0px rgba(0,0,0,0.4);
+                        .sub_nav_list{
+                            width: 9rem;
+                            list-style-type: none;
+                            .sub_nav_item{
+                                a{
+                                    background-color: $primary-color;
+                                    &:hover{
+                                        background-color: $primary-dark-color;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+    }
+}

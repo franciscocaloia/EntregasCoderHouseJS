@@ -1,0 +1,22 @@
+{
+  "name": "entregasgithubjs",
+  "version": "1.0.0",
+  "description": "Proyecto que simula un carrito de compras y calcula el costo total de la compra",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franciscocaloia/EntregasCoderHouseJS.git"
+  },
+  "author": "Francisco Caloia",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/franciscocaloia/EntregasCoderHouseJS/issues"
+  },
+  "homepage": "https://github.com/franciscocaloia/EntregasCoderHouseJS#readme",
+  "devDependencies": {
+    "sass": "^1.52.2"
+  }
+}

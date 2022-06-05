@@ -1,0 +1,85 @@
+.header_bar {
+  background-color: #066a96;
+  height: 4rem;
+}
+.header_bar .container {
+  max-width: 100rem;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.header_bar .container .logo {
+  display: flex;
+  align-items: center;
+}
+.header_bar .container .titulo {
+  color: #eee;
+  line-height: 3rem;
+  margin: 0.5rem;
+  font-weight: 400;
+}
+.header_bar .container .titulo .bold {
+  font-weight: bold;
+}
+.header_bar .container .nav_list {
+  width: 27rem;
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+}
+.header_bar .container .nav_list .nav_item {
+  width: 9rem;
+}
+.header_bar .container .nav_list .nav_item .sub_menu_1 {
+  display: none;
+}
+.header_bar .container .nav_list .nav_item a {
+  font-size: 1rem;
+  line-height: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  padding: 1rem;
+  text-decoration: none;
+  color: #eee;
+  transition: all 0.5s ease 0s;
+}
+.header_bar .container .nav_list .nav_item a .flecha {
+  display: inline-block;
+  height: 0.8rem;
+  transition: all 0.5s ease 0s;
+}
+.header_bar .container .nav_list .nav_item:hover a {
+  background-color: rgb(39, 72, 116);
+}
+.header_bar .container .nav_list .nav_item:hover a .flecha {
+  transform: rotateX(180deg) rotateZ(-90deg);
+}
+.header_bar .container .nav_list .nav_item:hover .sub_menu_1 {
+  display: block;
+  position: absolute;
+  box-shadow: 5px 4px 5px 0px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 5px 4px 5px 0px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 5px 4px 5px 0px rgba(0, 0, 0, 0.4);
+}
+.header_bar .container .nav_list .nav_item:hover .sub_menu_1 .sub_nav_list {
+  width: 9rem;
+  list-style-type: none;
+}
+.header_bar .container .nav_list .nav_item:hover .sub_menu_1 .sub_nav_list .sub_nav_item a {
+  background-color: #066a96;
+}
+.header_bar .container .nav_list .nav_item:hover .sub_menu_1 .sub_nav_list .sub_nav_item a:hover {
+  background-color: rgb(39, 72, 116);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+/*# sourceMappingURL=styles.css.map */
