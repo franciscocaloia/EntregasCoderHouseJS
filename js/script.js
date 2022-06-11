@@ -1,19 +1,17 @@
-function Producto(nombre,precio,stock){
+let id = 1;
+const productos = [];
+const carrito = [];
+function Producto(nombre,precio,descripcion,stock){
+    this.id=id++;
     this.nombre=nombre;
     this.precio=precio;
+    this.descripcion=descripcion;
     this.stock=stock;
 }
-
-function getNombreProducto(){
-    return prompt(mensaje);
-}
-function addProducto(nombre){
+let nuevoProducto,productoEncontrado;
+function addProductoCarrito(nombre){
     let productoEncontrado = productos.find((prod) => prod.nombre == nombre);
-    if(productoEncontrado == null){
-        alert("El nombre ingresado no coincide con ningun producto de la lista, por favor ingrese el nombre nuevamente");
-    }else{
-        carrito.push(productoEncontrado);
-    }
+    carrito.push(productoEncontrado);
 }
 function addIVA(monto){
     return monto*=1.21;
@@ -23,35 +21,34 @@ function addEnvio(monto){
     else return monto;
 }
 
-const productos = [];
-const carrito = [];
+productos.push(new Producto("arduino uno",2500,"Microprocesador arduino para proyectos de robotica y programacion",10));
+productos.push(new Producto("arduino nano",1500,"Microprocesador arduino para proyectos de robotica y programacion",10));
+productos.push(new Producto("arduino proMicro",2000,"Microprocesador arduino para proyectos de robotica y programacion",10));
+productos.push(new Producto("arduino leonardo",3000,"Microprocesador arduino para proyectos de robotica y programacion",10));
+productos.push(new Producto("arduino mega",4000,"Microprocesador arduino para proyectos de robotica y programacion",10));
+productos.push(new Producto("raspBerry pi",20000,"Microprocesador arduino para proyectos de robotica y programacion",10));
+productos.push(new Producto("raspBerry pi pico",1000,"Microprocesador arduino para proyectos de robotica y programacion",10));
 
-productos.push(new Producto("arduino uno",2500,10));
-productos.push(new Producto("arduino nano",1500,10));
-productos.push(new Producto("arduino proMicro",2000,10));
-productos.push(new Producto("arduino leonardo",3000,10));
-productos.push(new Producto("arduino mega",4000,10));
-productos.push(new Producto("raspBerry pi",20000,10));
-productos.push(new Producto("raspBerry pi pico",1000,10));
-
-let mensaje = "------Bienvenido a KloiArduino!------\nTenemos disponibles los siguientes productos:\n"
-for(const p of productos){
-    mensaje = mensaje.concat("\tNombre: " + p.nombre + "\t\t Precio: " + p.precio + "\n");
+function mostrarProductos(){
+    let contenedor = document.querySelector(".mainContainer");
+    for(const p of productos){
+        let productoHTML = document.createElement("div");
+        productoHTML.className="producto";
+        productoHTML.innerHTML=`<h2 class="nombreProducto">${p.nombre}</h2>
+                            <p class="precioProducto">$${p.precio}</p>
+                            <p class="descProducto">${p.descripcion}</p>
+                            <button class="buttonProducto agregarCarrito">Agregar al Carrito<button>`;
+        contenedor.appendChild(productoHTML);
+    }
 }
-    mensaje=mensaje.concat("Escriba el nombre del producto para agregarlo al carro de compras \n Presione cancelar para finalizar la compra.\nSi la compra es mayor a $4000 el envio sera sin cargo");
-let nuevoProducto,productoEncontrado;
-while(true){
-    nuevoProducto = getNombreProducto();
-    if (nuevoProducto == null)break;
-    addProducto(nuevoProducto);
-} 
+let botones = querySelectorAll(".agregarCarrito");
+for(const button of botones){
+    button.addEventListener("click",agregarCarrito);
+}
 let total=0;
 for(const pc of carrito){
     total += pc.precio;
 }
-
 total = addIVA(total);
-total = addEnvio(total);
-
-alert("El precio total de su compra es de: $"+ total + ".\n");
-
+total = addEnvio(total);    
+mostrarProductos();

@@ -7,6 +7,9 @@
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
+        a{
+            text-decoration: none;
+        }
         .logo{
             display:flex;
             align-items: center;
