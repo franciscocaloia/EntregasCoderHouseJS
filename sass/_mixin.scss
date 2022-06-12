@@ -1,0 +1,15 @@
+@mixin mediaQuery-tablet{
+    @media(min-width: 700px){
+        @content;
+    }
+}
+@mixin mediaQuery-desktop{
+    @media(min-width: 1040px){
+        @content;
+    }
+}
+@mixin mediaQuery-mobile{
+    @media(min-width: 320px){
+        @content;
+    }
+}

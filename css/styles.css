@@ -94,9 +94,19 @@
   align-items: center;
   justify-content: flex-start;
   border: 2px solid #c5c5c5;
+  border-radius: 0.5rem;
 }
 .mainContainer .producto .nombreProducto {
   color: rgb(39, 72, 116);
+}
+.mainContainer .producto .descProducto {
+  display: none;
+}
+@media (min-width: 1040px) {
+  .mainContainer .producto .descProducto {
+    display: block;
+    font-size: 0.8rem;
+  }
 }
 
 .buttonProducto {

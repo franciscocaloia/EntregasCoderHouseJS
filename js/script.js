@@ -9,8 +9,8 @@ function Producto(nombre,precio,descripcion,stock){
     this.stock=stock;
 }
 let nuevoProducto,productoEncontrado;
-function addProductoCarrito(nombre){
-    let productoEncontrado = productos.find((prod) => prod.nombre == nombre);
+function addProductoCarrito(idProductoSeleccionado){
+    let productoEncontrado = productos.find((prod) => prod.id == idProductoSeleccionado);
     carrito.push(productoEncontrado);
 }
 function addIVA(monto){
@@ -19,6 +19,31 @@ function addIVA(monto){
 function addEnvio(monto){
     if(monto <= 4000 && carrito.length != 0)return monto + 600;
     else return monto;
+}
+
+function agregarAlCarrito(event){
+    let idProductoSeleccionado = event.target.parentNode.id;
+    addProductoCarrito(idProductoSeleccionado);
+    mostrarTotalCompra();
+}
+
+
+function mostrarTotalCompra(){
+    let total=0;
+    for(const pc of carrito){
+        total += pc.precio;
+    }
+    total = addIVA(total);
+    total = addEnvio(total);
+    let totalHTML = document.querySelector(".mostrarTotal");
+    totalHTML.innerHTML = "El total de su compra es de: $"+total;
+}
+
+function borrarCarrito(){
+    while(carrito.length>0){
+        carrito.pop();
+    }
+    mostrarTotalCompra();
 }
 
 productos.push(new Producto("arduino uno",2500,"Microprocesador arduino para proyectos de robotica y programacion",10));
@@ -33,22 +58,21 @@ function mostrarProductos(){
     let contenedor = document.querySelector(".mainContainer");
     for(const p of productos){
         let productoHTML = document.createElement("div");
+        productoHTML.id=p.id;
         productoHTML.className="producto";
-        productoHTML.innerHTML=`<h2 class="nombreProducto">${p.nombre}</h2>
-                            <p class="precioProducto">$${p.precio}</p>
-                            <p class="descProducto">${p.descripcion}</p>
-                            <button class="buttonProducto agregarCarrito">Agregar al Carrito<button>`;
+        productoHTML.innerHTML=
+            `<h2 class="nombreProducto">${p.nombre}</h2>
+            <p class="precioProducto">$${p.precio}</p>
+            <p class="descProducto">${p.descripcion}</p>
+            <button class="buttonProducto agregarAlCarrito">Agregar al Carrito<button>`;
         contenedor.appendChild(productoHTML);
     }
 }
-let botones = querySelectorAll(".agregarCarrito");
-for(const button of botones){
-    button.addEventListener("click",agregarCarrito);
-}
-let total=0;
-for(const pc of carrito){
-    total += pc.precio;
-}
-total = addIVA(total);
-total = addEnvio(total);    
 mostrarProductos();
+mostrarTotalCompra();
+let botones = document.querySelectorAll(".agregarAlCarrito");
+for(const button of botones){
+    button.addEventListener("click",agregarAlCarrito);
+}
+let botonFinalizar = document.querySelector(".buttonBorrarCarrito");
+botonFinalizar.addEventListener("click",borrarCarrito);

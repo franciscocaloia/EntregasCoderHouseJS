@@ -13,11 +13,22 @@
         align-items: center;
         justify-content: flex-start;
         border: 2px solid $color-claro;
+        border-radius: 0.5rem;
         .nombreProducto{
             color: $primary-dark-color;
         }
+        .descProducto{
+            display: none;
+        }
+        @include mediaQuery-desktop{
+            .descProducto{
+                display: block;
+                font-size: 0.8rem;
+            }
+        }
     }
 }
+
 .buttonProducto{
     margin: 0.2rem;
     padding: 0.2rem;
