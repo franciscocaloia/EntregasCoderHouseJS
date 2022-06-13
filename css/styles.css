@@ -78,6 +78,11 @@
   background-color: rgb(39, 72, 116);
 }
 
+.tituloProductos {
+  margin-top: 1rem;
+  text-align: center;
+}
+
 .mainContainer {
   max-width: 80rem;
   width: 90%;
