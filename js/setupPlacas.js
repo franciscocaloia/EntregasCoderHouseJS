@@ -1,0 +1,3 @@
+mostrarProductos(boards);
+getCarritoStorage();
+mostrarTotalCompra();

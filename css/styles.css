@@ -116,10 +116,15 @@
 
 .buttonProducto {
   margin: 0.2rem;
-  padding: 0.2rem;
+  padding: 0.4rem;
   color: #eee;
   border: 1px solid rgb(39, 72, 116);
+  border-radius: 0.5rem;
   background-color: #066a96;
+}
+.buttonProducto:hover {
+  background-color: rgb(39, 72, 116);
+  cursor: pointer;
 }
 
 .controlProducto {
