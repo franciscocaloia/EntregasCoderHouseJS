@@ -1,29 +1,25 @@
 function mostrarProductos(arregloProductos) {
   let contenedor = document.querySelector(".mainContainer");
-  for (const p of arregloProductos) {
+  for (const { id, nombre, precio, descripcion } of arregloProductos) {
     let productoHTML = document.createElement("div");
-    productoHTML.id = p.id;
+    productoHTML.id = id;
     productoHTML.className = "producto";
-    productoHTML.innerHTML = `<h2 class="nombreProducto">${p.nombre}</h2>
-            <p class="precioProducto">$${p.precio}</p>
-            <p class="descProducto">${p.descripcion}</p>
+    productoHTML.innerHTML = `<h2 class="nombreProducto">${nombre}</h2>
+            <p class="precioProducto">$${precio}</p>
+            <p class="descProducto">${descripcion}</p>
             <button class="buttonProducto agregarAlCarrito">Agregar al Carrito<button>`;
     contenedor.appendChild(productoHTML);
   }
 }
 
 function getCarritoStorage() {
-  if (localStorage.getItem("carrito")) {
-    for (const p of JSON.parse(localStorage.getItem("carrito"))) {
-      carrito.push(p);
-    }
-  } else {
-    localStorage.setItem("carrito", []);
-  }
+  localStorage.getItem("carrito")
+    ? JSON.parse(localStorage.getItem("carrito")).map((p) => carrito.push(p))
+    : localStorage.setItem("carrito", carrito);
 }
 
 function mostrarTotalCompra() {
-  let total = carrito.reduce((previous, actual) => previous + actual.precio, 0);
+  let total = carrito.reduce((previous, { precio }) => previous + precio, 0);
   total = addIVA(total);
   total = addEnvio(total);
   let totalHTML = document.querySelector(".mostrarTotal");
@@ -46,18 +42,16 @@ function agregarAlCarrito(event) {
     case "b":
       console.log("hola");
       productoEncontrado = boards.find(
-        (prod) => prod.id == idProductoSeleccionado
+        ({ id }) => id == idProductoSeleccionado
       );
       break;
     case "s":
       productoEncontrado = sensors.find(
-        (prod) => prod.id == idProductoSeleccionado
+        ({ id }) => id == idProductoSeleccionado
       );
       break;
     case "k":
-      productoEncontrado = kits.find(
-        (prod) => prod.id == idProductoSeleccionado
-      );
+      productoEncontrado = kits.find(({ id }) => id == idProductoSeleccionado);
       break;
     default:
       break;
@@ -74,4 +68,21 @@ function addIVA(monto) {
 function addEnvio(monto) {
   if (monto <= 4000 && carrito.length != 0) return monto + 600;
   else return monto;
+}
+
+function mostrarAlertaComprobacion(event) {
+  swal("Desea eliminar todos los elementos del carrito?", {
+    buttons: {
+      cancel: true,
+      ok: true,
+    },
+  }).then((value) => {
+    switch (value) {
+      case "ok":
+        borrarCarrito();
+        break;
+      default:
+        break;
+    }
+  });
 }

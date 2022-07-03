@@ -4,4 +4,4 @@ for (const button of botones) {
 }
 
 let botonFinalizar = document.querySelector(".buttonBorrarCarrito");
-botonFinalizar.addEventListener("click", borrarCarrito);
+botonFinalizar.addEventListener("click", mostrarAlertaComprobacion);
