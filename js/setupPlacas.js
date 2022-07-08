@@ -1,3 +1,3 @@
-mostrarProductos(boards);
+mostrarProductosBoards(boards).then(() => addEventos());
 getCarritoStorage();
 mostrarTotalCompra();

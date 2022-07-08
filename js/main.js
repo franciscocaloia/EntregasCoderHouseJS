@@ -1,7 +1,9 @@
-function mostrarProductos(arregloProductos) {
+async function mostrarProductosBoards(arregloProductos) {
+  await getBoarsData();
   let contenedor = document.querySelector(".mainContainer");
   for (const { id, nombre, precio, descripcion } of arregloProductos) {
     let productoHTML = document.createElement("div");
+    console.log("hola");
     productoHTML.id = id;
     productoHTML.className = "producto";
     productoHTML.innerHTML = `<h2 class="nombreProducto">${nombre}</h2>
@@ -85,4 +87,20 @@ function mostrarAlertaComprobacion(event) {
         break;
     }
   });
+}
+
+async function getBoarsData() {
+  await fetch("../data/boards.json")
+    .then((res) => res.json())
+    .then((dataJSON) => {
+      dataJSON.forEach((boardJSON) => {
+        let newBoard = new Board(
+          boardJSON.nombre,
+          boardJSON.precio,
+          boardJSON.descripcion,
+          boardJSON.stock
+        );
+        boards.push(newBoard);
+      });
+    });
 }

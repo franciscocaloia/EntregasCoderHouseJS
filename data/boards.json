@@ -1,0 +1,7 @@
+[   {"nombre":"arduino uno","precio":2500,"descripcion":"Microprocesador arduino para proyectos de robotica y programacion","stock":10,"id":"b1"},
+    {"nombre":"arduino nano","precio":1500,"descripcion":"Microprocesador arduino para proyectos de robotica y programacion","stock":10,"id":"b2"},
+    {"nombre":"arduino proMicro","precio":2000,"descripcion":"Microprocesador arduino para proyectos de robotica y programacion","stock":10,"id":"b3"},
+    {"nombre":"arduino leonardo","precio":3000,"descripcion":"Microprocesador arduino para proyectos de robotica y programacion","stock":10,"id":"b4"},
+    {"nombre":"arduino mega","precio":4000,"descripcion":"Microprocesador arduino para proyectos de robotica y programacion","stock":10,"id":"b5"},
+    {"nombre":"raspBerry pi","precio":20000,"descripcion":"Microprocesador arduino para proyectos de robotica y programacion","stock":10,"id":"b6"},
+    {"nombre":"raspBerry pi pico","precio":1000,"descripcion":"Microprocesador arduino para proyectos de robotica y programacion","stock":10,"id":"b7"}]
