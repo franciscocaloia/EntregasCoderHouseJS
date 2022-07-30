@@ -2,6 +2,7 @@ getCartStorage();
 (async () => {
   await getProductsData();
   showCart();
+  showHistory();
 })();
 document
   .querySelector("#deleteCart")

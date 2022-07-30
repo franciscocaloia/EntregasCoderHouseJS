@@ -9,6 +9,14 @@ class Producto {
   }
 }
 
+class HistoryPurchase {
+  constructor(cart, total) {
+    this.productsHistory = cart;
+    this.total = total;
+    this.id = idHistory++;
+  }
+}
+
 function mostrarProductos(typeProduct, searchName) {
   let mainContainer = document.querySelector("#mainContainer");
   mainContainer.innerHTML = "";
@@ -21,11 +29,11 @@ function mostrarProductos(typeProduct, searchName) {
     let productoHTML = document.createElement("div");
     productoHTML.id = `producto-${id}`;
     productoHTML.className = "producto";
-    productoHTML.innerHTML = `<img class="imgProducto" src="${img}">
-                              <h2 class="nombreProducto">${name}</h2>
-                              <p class="descProducto">${description}</p>
-                              <div class="priceItems">
-                                <p class="precioProducto">$${price}</p>
+    productoHTML.innerHTML = `<img class="productImg" src="${img}">
+                              <h2 class="productName">${name}</h2>
+                              <p class="productDesc">${description}</p>
+                              <div class="price-items">
+                                <p class="productPrice">$${price}</p>
                                 <div id="buttons-${id}" class="buttons">
                                 </div>
                               </div>`;
@@ -48,14 +56,14 @@ function mostrarProductos(typeProduct, searchName) {
 
 function createButtonProducto(innerHTML, containerHTML) {
   let button = document.createElement("button");
-  button.className = `buttonProducto`;
+  button.className = `productButton`;
   button.innerHTML = innerHTML;
   containerHTML.appendChild(button);
   return button;
 }
 
 function addUpdateEvents(updateFunction) {
-  buttons = document.querySelectorAll(".buttonProducto");
+  buttons = document.querySelectorAll(".productButton");
   buttons.forEach((button) => {
     button.addEventListener("click", updateFunction);
   });
@@ -67,17 +75,29 @@ function getCartStorage() {
     : localStorage.setItem("cart", cart);
 }
 
+function getHistoryStorage() {
+  localStorage.getItem("history")
+    ? JSON.parse(localStorage.getItem("history")).forEach((h) =>
+        history.push(new HistoryPurchase(h.productsHistory, h.total))
+      )
+    : localStorage.setItem("history", history);
+}
+
 function showCart() {
   let total = 0;
   let tablaCart = document.querySelector("#cartContent");
   tablaCart.innerHTML = "";
   total = cart
     .map(({ id: idCart, items }) => {
-      const { name, price } = products.find(({ id }) => id === idCart);
+      const { name, price, img } = products.find(({ id }) => id === idCart);
       let productoCartHtml = document.createElement("tr");
-      productoCartHtml.innerHTML = `<td>${name}</td>
-                                  <td>${price}</td>
-                                  <td>
+      productoCartHtml.classList = "cartRow";
+      productoCartHtml.innerHTML = `<td class="cartNameImg">
+                                    <img class="cartImg" src="${img}">
+                                    <p>${name}</p>
+                                  </td>
+                                  <td class="cartPrice">${price}</td>
+                                  <td class="cartButtons">
                                     <div id="buttons-${idCart}" class="buttons">
                                     </div>
                                   </td>`;
@@ -99,6 +119,30 @@ function showCart() {
       </td>`;
   totalHTML.id = "totalCart";
   tablaCart.appendChild(totalHTML);
+  document
+    .querySelector("#cartFinal")
+    .addEventListener("click", () => alertCartFinal(total));
+}
+
+function showHistory() {
+  getHistoryStorage();
+  console.log("hola");
+  let historyHTML = document.querySelector("#historyContainer");
+  historyHTML.innerHTML = "";
+  history.forEach((historyInstance) => {
+    let historyInstanceHTML = document.createElement("ul");
+    historyInstanceHTML.innerHTML = `<li class="historyProduct"><b>Compra N°${historyInstance.id}</b></li>`;
+    historyInstanceHTML.innerHTML += historyInstance.productsHistory
+      .map((cartProduct) => {
+        let { name } = products.find(
+          (product) => cartProduct.id === product.id
+        );
+        return `<li class="historyProduct"><span class="historyName">${name}</span><span class="historyItems">${cartProduct.items}</span></li>`;
+      })
+      .join("");
+    historyInstanceHTML.innerHTML += `<li class="historyProduct"><span class="historyName"><b>TOTAL</b></span><span class="historyItems">${historyInstance.total}</span></li>`;
+    historyHTML.appendChild(historyInstanceHTML);
+  });
 }
 
 function showItemsButtons(idCart, items, containerHTML) {
@@ -190,6 +234,38 @@ async function alertDeleteCart() {
     default:
       break;
   }
+}
+
+async function alertCartFinal(total) {
+  let mensaje = document.createElement("p");
+  mensaje.innerHTML = `El total a pagar será de ${total}\n
+                        Seleccione [Pagar] para finalizar con la compra. Muchas gracias!`;
+  let response = await swal({
+    content: mensaje,
+    buttons: {
+      cancel: true,
+      Pagar: true,
+    },
+  });
+  switch (response) {
+    case "Pagar":
+      swal("Gracias por elegirnos!");
+      addToHistory(cart, total);
+      deleteCart();
+      showCart();
+      break;
+    default:
+      break;
+  }
+}
+
+function addToHistory(cart, total) {
+  let historyObjet = {
+    productsHistory: cart,
+    total: total,
+  };
+  history.push(historyObjet);
+  localStorage.setItem("history", JSON.stringify(history));
 }
 
 async function getProductsData() {

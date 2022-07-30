@@ -37,20 +37,29 @@
         </div>
     </header>
     <main>
-        <h2 class="tituloProductos">Carrito de compras</h2>
-        <div id="cartContainer">
-                <table class="cartTable">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cartContent">
-                    </tbody>
-                </table>
-                <button id="deleteCart" class="buttonProducto">Limpiar Carro de compras</button>
+        <div id="cartContainer" class="container">
+            <div class="cartTable">
+                <h2 class="tituloProductos">Carrito de compras</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="cartName">Nombre</th>
+                                <th class="cartPrice">Precio</th>
+                                <th class="cartButtons">Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartContent">
+                        </tbody>
+                    </table>
+                    <div class="cartManager">
+                        <button id="deleteCart" class="productButton">Limpiar Carro de compras</button>
+                        <button id="cartFinal" class="productButton">Finalizar Compra</button>
+                    </div>
+            </div>
+            <div class="cartHistory">
+                <h2 class="tituloProductos">Historial de Compras</h2>
+                <div id="historyContainer"></div>
+            </div>
         </div>
     </main>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

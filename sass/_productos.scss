@@ -1,12 +1,15 @@
 .tituloProductos{
     margin-top: 1rem;
-    text-align: center;
+    text-align: left;
 }
 
-#mainContainer{
+.container{
     max-width: 80rem;
     width: 90%;
     margin: 2rem auto;
+}
+
+#mainContainer{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     .producto{
@@ -18,15 +21,15 @@
         justify-content: flex-start;
         border: 2px solid $color-claro;
         border-radius: 0.5rem;
-        .imgProducto{
+        .productImg{
             height: 15rem;
             width: 100%;
             object-fit: cover;  
         }
-        .nombreProducto{
+        .productName{
             color: $primary-dark-color;
         }
-        .descProducto{
+        .productDesc{
             display: none;
         }
         @include mediaQuery-desktop{
@@ -38,19 +41,19 @@
     }
 }
 
-.priceItems{
+.price-items{
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
 }
 .buttons{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
-.buttonProducto{
+.productButton{
     margin: 0.5rem;
     padding: 0.2rem;
     color: $white-color;
@@ -63,13 +66,6 @@
         background-color: $primary-dark-color;
         cursor: pointer;
     }
-}
-
-.controlProducto{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 1rem;
 }
 
 .searchBar{

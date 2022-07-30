@@ -1,5 +1,48 @@
 #cartContainer{
-    max-width: 80rem;
-    width: 90%;
-    margin: 2rem auto;
+    display: flex;
+    justify-content: space-between; 
+}
+.cartTable{
+    width: 60%;
+    table{
+        width: 100%;
+        border-collapse: collapse;
+    tr{
+        height: 4rem;
+        border-bottom: 2px solid $color-claro;
+        .cartName,.cartPrice,.cartButtons{
+            text-align: start;
+        }
+        .cartNameImg{
+            display: flex;
+            align-items: center;
+            .cartImg{
+                margin:  0 0.5rem 0 0.5rem;
+                height: 4rem;
+                width: 4rem;
+                object-fit: cover;  
+            }
+        }
+        .cartButtons{
+            .buttons{
+                justify-content: flex-start;
+            }
+        }
+    }
+    }
+    
+}
+
+.cartHistory{
+    width: 35%;
+    ul{
+        list-style-type: none;
+        border: 1px solid $color-claro;
+        margin: 1rem;
+        .historyProduct{
+            display: flex;  
+            justify-content: space-between;
+            height: 2rem;
+        }
+    }
 }

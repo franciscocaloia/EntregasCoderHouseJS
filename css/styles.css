@@ -80,13 +80,16 @@
 
 .tituloProductos {
   margin-top: 1rem;
-  text-align: center;
+  text-align: left;
 }
 
-#mainContainer {
+.container {
   max-width: 80rem;
   width: 90%;
   margin: 2rem auto;
+}
+
+#mainContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
@@ -100,15 +103,15 @@
   border: 2px solid #c5c5c5;
   border-radius: 0.5rem;
 }
-#mainContainer .producto .imgProducto {
+#mainContainer .producto .productImg {
   height: 15rem;
   width: 100%;
   object-fit: cover;
 }
-#mainContainer .producto .nombreProducto {
+#mainContainer .producto .productName {
   color: rgb(39, 72, 116);
 }
-#mainContainer .producto .descProducto {
+#mainContainer .producto .productDesc {
   display: none;
 }
 @media (min-width: 1040px) {
@@ -118,7 +121,7 @@
   }
 }
 
-.priceItems {
+.price-items {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -128,9 +131,10 @@
 .buttons {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-.buttonProducto {
+.productButton {
   margin: 0.5rem;
   padding: 0.2rem;
   color: #eee;
@@ -140,16 +144,9 @@
   min-height: 1.5rem;
   min-width: 1.5rem;
 }
-.buttonProducto:hover {
+.productButton:hover {
   background-color: rgb(39, 72, 116);
   cursor: pointer;
-}
-
-.controlProducto {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
 }
 
 .searchBar {
@@ -160,9 +157,50 @@
 }
 
 #cartContainer {
-  max-width: 80rem;
-  width: 90%;
-  margin: 2rem auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cartTable {
+  width: 60%;
+}
+.cartTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.cartTable table tr {
+  height: 4rem;
+  border-bottom: 2px solid #c5c5c5;
+}
+.cartTable table tr .cartName, .cartTable table tr .cartPrice, .cartTable table tr .cartButtons {
+  text-align: start;
+}
+.cartTable table tr .cartNameImg {
+  display: flex;
+  align-items: center;
+}
+.cartTable table tr .cartNameImg .cartImg {
+  margin: 0 0.5rem 0 0.5rem;
+  height: 4rem;
+  width: 4rem;
+  object-fit: cover;
+}
+.cartTable table tr .cartButtons .buttons {
+  justify-content: flex-start;
+}
+
+.cartHistory {
+  width: 35%;
+}
+.cartHistory ul {
+  list-style-type: none;
+  border: 1px solid #c5c5c5;
+  margin: 1rem;
+}
+.cartHistory ul .historyProduct {
+  display: flex;
+  justify-content: space-between;
+  height: 2rem;
 }
 
 * {
