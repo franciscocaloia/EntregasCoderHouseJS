@@ -26,8 +26,6 @@
                         <ul class="sub_nav_list">
                             <li class="sub_nav_item"><a href="./placas.html">Placas</a></li>
                             <li class="sub_nav_item"><a href="./sensores.html">Sensores</a></li>
-                            <li class="sub_nav_item"><a href="./conexiones.html">Conexiones</a></li>
-                            <li class="sub_nav_item"><a href="./kits.html">Kits Arduino</a></li>
                         </ul>
                     </div>
                     </li>
@@ -39,18 +37,25 @@
         </div>
     </header>
     <main>
-        <div class="carritoContainer">
-            <h2>Carrito de compras</h2>
-            <div class="categoriaCarrito">
-
-            </div>
+        <h2 class="tituloProductos">Carrito de compras</h2>
+        <div id="cartContainer">
+                <table class="cartTable">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartContent">
+                    </tbody>
+                </table>
+                <button id="deleteCart" class="buttonProducto">Limpiar Carro de compras</button>
         </div>
     </main>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="../js/variables.js"></script>
-    <script src="../js/clases.js"></script>
-    <script src="../js/baseDatos.js"></script>
     <script src="../js/main.js"></script>
-    <script src="../js/eventos.js"></script>
+    <script src="../js/setupCarrito.js"></script>
 </body>
 </html>

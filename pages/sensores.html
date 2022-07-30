@@ -26,8 +26,6 @@
                         <ul class="sub_nav_list">
                             <li class="sub_nav_item"><a href="./placas.html">Placas</a></li>
                             <li class="sub_nav_item"><a href="./sensores.html">Sensores</a></li>
-                            <li class="sub_nav_item"><a href="./conexiones.html">Conexiones</a></li>
-                            <li class="sub_nav_item"><a href="./kits.html">Kits Arduino</a></li>
                         </ul>
                     </div>
                     </li>
@@ -37,8 +35,19 @@
                 </ul>
             </nav>
         </div>
-        
     </header>
+    <main>
+        <h2 class="tituloProductos">Productos Disponibles</h2>
+        <div class="searchBar">
+            <label for="searchProducts">Busqueda de Productos</label>
+            <input type="search" id="searchProducts">
+        </div>
+        <div id="mainContainer">
+        </div>
+    </main>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../js/variables.js"></script>
     <script src="../js/main.js"></script>
+    <script src="../js/setupSensores.js"></script>
 </body>
 </html>

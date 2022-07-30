@@ -1,13 +1,5 @@
-.carritoContainer{
+#cartContainer{
     max-width: 80rem;
     width: 90%;
     margin: 2rem auto;
-    .carritoCategoria{
-        display: flex;
-        flex-direction: column;
-        .productoCarrito{
-            display: flex;
-            
-        }
-    }
 }
