@@ -17,6 +17,36 @@ class HistoryPurchase {
   }
 }
 
+async function getProductsData() {
+  const response = await fetch("../data/products.json");
+  const dataJSON = await response.json();
+  dataJSON.forEach((productJSON) => {
+    let newProduct = new Producto(
+      productJSON.name,
+      productJSON.price,
+      productJSON.description,
+      productJSON.type,
+      productJSON.img
+    );
+    products.push(newProduct);
+  });
+  return products;
+}
+
+function getCartStorage() {
+  localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart")).map((p) => cart.push(p))
+    : localStorage.setItem("cart", cart);
+}
+
+function getHistoryStorage() {
+  localStorage.getItem("history")
+    ? JSON.parse(localStorage.getItem("history")).forEach((h) =>
+        history.push(new HistoryPurchase(h.productsHistory, h.total))
+      )
+    : localStorage.setItem("history", history);
+}
+
 function mostrarProductos(typeProduct, searchName) {
   let mainContainer = document.querySelector("#mainContainer");
   mainContainer.innerHTML = "";
@@ -52,35 +82,6 @@ function mostrarProductos(typeProduct, searchName) {
     }
   });
   addUpdateEvents(() => mostrarProductos(typeProduct, searchName));
-}
-
-function createButtonProducto(innerHTML, containerHTML) {
-  let button = document.createElement("button");
-  button.className = `productButton`;
-  button.innerHTML = innerHTML;
-  containerHTML.appendChild(button);
-  return button;
-}
-
-function addUpdateEvents(updateFunction) {
-  buttons = document.querySelectorAll(".productButton");
-  buttons.forEach((button) => {
-    button.addEventListener("click", updateFunction);
-  });
-}
-
-function getCartStorage() {
-  localStorage.getItem("cart")
-    ? JSON.parse(localStorage.getItem("cart")).map((p) => cart.push(p))
-    : localStorage.setItem("cart", cart);
-}
-
-function getHistoryStorage() {
-  localStorage.getItem("history")
-    ? JSON.parse(localStorage.getItem("history")).forEach((h) =>
-        history.push(new HistoryPurchase(h.productsHistory, h.total))
-      )
-    : localStorage.setItem("history", history);
 }
 
 function showCart() {
@@ -126,7 +127,6 @@ function showCart() {
 
 function showHistory() {
   getHistoryStorage();
-  console.log("hola");
   let historyHTML = document.querySelector("#historyContainer");
   historyHTML.innerHTML = "";
   history.forEach((historyInstance) => {
@@ -158,6 +158,14 @@ function showItemsButtons(idCart, items, containerHTML) {
   createButtonProducto(`+`, containerHTML).addEventListener("click", () => {
     incrementCartItem(idCart);
   });
+}
+
+function createButtonProducto(innerHTML, containerHTML) {
+  let button = document.createElement("button");
+  button.className = `productButton`;
+  button.innerHTML = innerHTML;
+  containerHTML.appendChild(button);
+  return button;
 }
 
 function incrementCartItem(idProductoSeleccionado) {
@@ -194,6 +202,22 @@ function deleteCart() {
     cart.pop();
   }
   localStorage.setItem("cart", cart);
+}
+
+function addToHistory(cart, total) {
+  let historyObjet = {
+    productsHistory: cart,
+    total: total,
+  };
+  history.push(historyObjet);
+  localStorage.setItem("history", JSON.stringify(history));
+}
+
+function addUpdateEvents(updateFunction) {
+  buttons = document.querySelectorAll(".productButton");
+  buttons.forEach((button) => {
+    button.addEventListener("click", updateFunction);
+  });
 }
 
 async function alertDeleteCartItem(id, name) {
@@ -252,34 +276,10 @@ async function alertCartFinal(total) {
       swal("Gracias por elegirnos!");
       addToHistory(cart, total);
       deleteCart();
+      showHistory();
       showCart();
       break;
     default:
       break;
   }
-}
-
-function addToHistory(cart, total) {
-  let historyObjet = {
-    productsHistory: cart,
-    total: total,
-  };
-  history.push(historyObjet);
-  localStorage.setItem("history", JSON.stringify(history));
-}
-
-async function getProductsData() {
-  const response = await fetch("../data/products.json");
-  const dataJSON = await response.json();
-  dataJSON.forEach((productJSON) => {
-    let newProduct = new Producto(
-      productJSON.name,
-      productJSON.price,
-      productJSON.description,
-      productJSON.type,
-      productJSON.img
-    );
-    products.push(newProduct);
-  });
-  return products;
 }
