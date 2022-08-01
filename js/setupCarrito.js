@@ -1,4 +1,5 @@
 getCartStorage();
+getHistoryStorage();
 (async () => {
   await getProductsData();
   showCart();

@@ -126,7 +126,6 @@ function showCart() {
 }
 
 function showHistory() {
-  getHistoryStorage();
   let historyHTML = document.querySelector("#historyContainer");
   historyHTML.innerHTML = "";
   history.forEach((historyInstance) => {
@@ -205,10 +204,7 @@ function deleteCart() {
 }
 
 function addToHistory(cart, total) {
-  let historyObjet = {
-    productsHistory: cart,
-    total: total,
-  };
+  let historyObjet = new HistoryPurchase(cart, total);
   history.push(historyObjet);
   localStorage.setItem("history", JSON.stringify(history));
 }
@@ -275,8 +271,8 @@ async function alertCartFinal(total) {
     case "Pagar":
       swal("Gracias por elegirnos!");
       addToHistory(cart, total);
-      deleteCart();
       showHistory();
+      deleteCart();
       showCart();
       break;
     default:
